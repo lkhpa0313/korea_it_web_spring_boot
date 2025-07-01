@@ -4,6 +4,8 @@ import com.koreait.spring_boot_study.dto.SigninReqDto;
 import com.koreait.spring_boot_study.dto.SigninRespDto;
 import com.koreait.spring_boot_study.dto.SignupReqDto;
 import com.koreait.spring_boot_study.dto.SignupRespDto;
+import com.koreait.spring_boot_study.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+    @Autowired
+    private AuthService authService;
     //@RequestParam
     //클라이언트가 URL 쿼리스트링으로 넘긴 값을 메소드 파라미터로 전달
 
@@ -112,6 +116,6 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<SignupRespDto> signup(@RequestBody SignupReqDto signupReqDto) {
-
+        return ResponseEntity.ok().body(authService.signup(signupReqDto));
     }
 }
